@@ -1,10 +1,11 @@
 defmodule WakeUp.Alarms.Worker do
   use GenServer
 
+  require Logger
+
   @delay :timer.minutes(5)
 
   def start_link(url) do
-    IO.inspect(url)
     GenServer.start_link(__MODULE__, url)
   end
 
@@ -14,7 +15,10 @@ defmodule WakeUp.Alarms.Worker do
   end
 
   def handle_info(:work, url) do
-    :hackney.get(url, [], :stream, follow_redirect: true, max_redirect: 5)
+    Logger.info("START PING '#{url}'")
+    response = :hackney.get(url, follow_redirect: true, max_redirect: 5)
+    Logger.info("END PING '#{url}'\n\t#{inspect(response)}")
+
     schedule_work()
     {:noreply, url}
   end
