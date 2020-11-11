@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :wake_up_web, WakeUpWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  url: [host: "example.com", port: 80],
+  url: [host: "sandybrown-deafening-xantus.gigalixirapp.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # ## SSL Support
